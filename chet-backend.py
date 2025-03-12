@@ -2,18 +2,18 @@ from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 
 app = Flask(__name__)
-chats = {}
+chats = {} 
 
-@app.route("/" , methods=["GET"])
+@app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
 
-@app.route("/<room>" , methods=["GET"])
+@app.route("/<room>", methods=["GET"])
 def home_room(room):
     return render_template("index.html")
 
 @app.route("/api/chat/<room>", methods=["POST"])
-def  post_message(room):
+def post_message(room):
     username = request.form.get("username")
     message = request.form.get("msg")
     
@@ -31,7 +31,10 @@ def  post_message(room):
 
 @app.route("/api/chat/<room>", methods=["GET"])
 def get_chat(room):
-    return "\n".join(["2024-09-10 14:00:51] Roey: Hi everybody!"]), 200
+    if room in chats:
+        return "\n".join(chats[room]), 200
+    else:
+        return jsonify({"error": "No messages in this room"}), 404
 
-if __name__=="__main__":
-    app.run()
+if __name__ == "__main__":
+    app.run(debug=True)
