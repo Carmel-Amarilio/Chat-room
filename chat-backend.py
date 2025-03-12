@@ -3,27 +3,28 @@ from datetime import datetime
 import mysql.connector
 from mysql.connector import Error
 
-
 app = Flask(__name__)
 
-def get_db_connection():
+def get_db_connection(): #Carmel & Max
     return mysql.connector.connect(
-        host='db',  # Docker container name for MySQL service
+        host='db', 
         user='root',
         password='123',
         database='chat_db'
     )
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET"]) #Carmel
 def home():
     return render_template("index.html")
 
-@app.route("/<room>", methods=["GET"])
+
+@app.route("/<room>", methods=["GET"]) #Max
 def home_room(room):
     return render_template("index.html")
 
-@app.route("/api/chat/<room>", methods=["POST"])
+
+@app.route("/api/chat/<room>", methods=["POST"]) #Carmel
 def post_message(room):
     try:
         username = request.form.get("username")
@@ -49,7 +50,8 @@ def post_message(room):
         print(f"Error: {e}")
         return jsonify({"error": "An error occurred while saving the message."}), 500
 
-@app.route("/api/chat/<room>", methods=["GET"])
+
+@app.route("/api/chat/<room>", methods=["GET"]) #Max
 def get_chat(room):
     try:
         connection = get_db_connection()

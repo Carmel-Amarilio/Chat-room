@@ -1,3 +1,4 @@
+-- Max
 CREATE DATABASE IF NOT EXISTS chat_db;
 
 USE chat_db;
