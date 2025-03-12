@@ -9,6 +9,8 @@
 
     function updateChat() {
       $.get(room(), function(data) {
+        console.log(data);
+        
         $("#chatbox").text(data);
         window.setTimeout(updateChat, 1500);
       })
