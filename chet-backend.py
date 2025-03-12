@@ -34,7 +34,7 @@ def get_chat(room):
     if room in chats:
         return "\n".join(chats[room]), 200
     else:
-        return jsonify({"error": "No messages in this room"}), 404
+        return "No messages in this room", 201
 
 if __name__ == "__main__":
     app.run(debug=True)
