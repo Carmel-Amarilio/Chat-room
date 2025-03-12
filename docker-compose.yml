@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: chat_db
     ports:
       - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - chat-network
 
@@ -19,9 +21,15 @@ services:
       - "5000:5000"
     depends_on:
       - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123
+      - MYSQL_DB=chat_db
     networks:
       - chat-network
 
 networks:
   chat-network:
     driver: bridge
+

@@ -9,7 +9,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='db',  # Docker container name for MySQL service
         user='root',
-        password='password',
+        password='123',
         database='chat_db'
     )
 
@@ -80,3 +80,5 @@ def get_chat(room):
 if __name__ == "__main__":
     init_db()  # Initialize database (only needed once)
     app.run(debug=True, host="0.0.0.0")
+
+
