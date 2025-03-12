@@ -46,7 +46,7 @@ def post_message(room):
     if not username or not message:
         return jsonify({"error": "Both username and message are required."}), 400
 
-    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     connection = get_db_connection()
     cursor = connection.cursor()
@@ -78,7 +78,7 @@ def get_chat(room):
         return "No messages in this room", 200
 
 if __name__ == "__main__":
-    init_db()  # Initialize database (only needed once)
+    init_db() 
     app.run(debug=True, host="0.0.0.0")
 
 
